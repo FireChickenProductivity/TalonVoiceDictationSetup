@@ -21,6 +21,8 @@ _default_additional_snippets = {
     'open pren': ' (',
     'close paren': ')',
     'close pren': ')',
+    'apostrophe s': "'s",
+    'apostrophe': "'",
 }
 
 _snippets = get_list_from_csv(
