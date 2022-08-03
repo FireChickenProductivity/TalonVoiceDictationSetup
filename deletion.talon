@@ -38,3 +38,9 @@ clear word <number_small>:
     repeat(number_small - 1)
     edit.extend_word_left()
     edit.delete()
+
+#My alternative to "scratch that"
+^wrong wrong$: user.clear_last_phrase()
+^wrong wrong <number_small>$:
+    user.clear_last_phrase()
+    repeat(number_small - 1)
