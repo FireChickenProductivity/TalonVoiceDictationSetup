@@ -24,6 +24,10 @@ replace <user.draft_anchor> with <user.text>:
 (take | select) <user.draft_anchor>:
   user.draft_select("{draft_anchor}")
 
+(phone|phones|homophone|homophones) <user.draft_anchor>:
+  user.draft_select("{draft_anchor}")
+  user.homophones_show_selection()
+
 # Select a range of words
 (take | select) <user.draft_anchor> (through | past) <user.draft_anchor>:
   user.draft_select("{draft_anchor_1}", "{draft_anchor_2}")
