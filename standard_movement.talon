@@ -13,6 +13,11 @@ go right <number_small>:
     edit.right()
     repeat(number_small - 1)
 
+up up: edit.up()
+down down: edit.down()
+left left: edit.left()
+right right: edit.right()
+
 left <number_small> (word|words):
     edit.word_left()
     repeat(number_small - 1)
