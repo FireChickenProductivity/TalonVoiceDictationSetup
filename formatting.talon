@@ -7,3 +7,8 @@ title case <user.raw_prose>:
 form form <user.format_text>:
     user.dictation_insert_raw(format_text)
 word word <user.word>: user.insert_with_history(user.word)
+press ship <user.letters>:
+    user.insert_formatted(letters, "ALL_CAPS")
+ship ship <user.letters>:
+    result = user.formatted_text(letters, "ALL_CAPS")
+    user.dictation_insert_raw(result)
