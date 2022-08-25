@@ -18,7 +18,7 @@ push (exclaim|exclamation [(point|mark)]): user.fire_chicken_dictation_send_draf
 push (Para|paragraph|pair): user.fire_chicken_dictation_send_draft_text_with_ending('\n\t')
 push sentence (Para|paragraph|pair): user.fire_chicken_dictation_send_draft_text_with_ending('.\n\t')
 
-push (last|finished|done|finish):
+push (last|finished|done|finish|push):
   user.fire_chicken_dictation_draft_submit()
   mode.disable('dictation')
   mode.enable('command')
