@@ -20,5 +20,8 @@ push sentence (Para|paragraph|pair): user.fire_chicken_dictation_send_draft_text
 
 push (last|finished|done|finish|push):
   user.fire_chicken_dictation_draft_submit()
-  mode.disable('dictation')
-  mode.enable('command')
+  user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
+
+discard discard:
+  user.draft_hide()
+  user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
