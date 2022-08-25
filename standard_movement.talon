@@ -1,15 +1,15 @@
 mode: dictation
 -
-go up <number_small>:
+(go up|up up) <number_small>:
     edit.up()
     repeat(number_small - 1)
-go down <number_small>:
+(go down|down down) <number_small>:
     edit.down()
     repeat(number_small - 1)
-go left <number_small>:
+(go left|left left) <number_small>:
     edit.left()
     repeat(number_small - 1)
-go right <number_small>:
+(go right|right right) <number_small>:
     edit.right()
     repeat(number_small - 1)
 
