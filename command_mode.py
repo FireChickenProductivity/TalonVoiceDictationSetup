@@ -10,3 +10,7 @@ class Actions:
         actions.mode.enable("dictation")
         actions.user.code_clear_language_mode()
         actions.mode.disable("user.gdb")
+    def fire_chicken_dictation_enable_command_mode_from_dictation_mode():
+        '''Enables command mode from dictation mode'''
+        actions.mode.disable("dictation")
+        actions.mode.enable("command")
