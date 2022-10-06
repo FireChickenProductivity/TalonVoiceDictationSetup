@@ -1,4 +1,4 @@
-from talon import Module, actions
+from talon import Module, actions, clip
 
 module = Module()
 
@@ -9,8 +9,20 @@ draft_submit_delay = module.setting(
     desc = 'How long to wait between closing the draft window and submitting the draft window draft in milliseconds', 
 )
 
+draft_paste_delay = module.setting(
+    'fire_chicken_dictation_draft_paste_delay',
+    type = int,
+    default = 200,
+    desc = 'How long to wait after pasting the draft window text to let the clipboard revert properly',
+)
+
 def sleep_draft_submit_delay():
-    actions.sleep(f'{draft_submit_delay.get()}ms')
+    sleep_delay_setting_amount(draft_submit_delay)
+def sleep_draft_paste_delay():
+    sleep_delay_setting_amount(draft_paste_delay)
+
+def sleep_delay_setting_amount(setting):
+    actions.sleep(f'{setting.get()}ms')
 
 @module.action_class
 class Actions:
@@ -31,6 +43,17 @@ class Actions:
     def fire_chicken_dictation_start_new_draft():
         '''Opens the draft window and selects all the text'''
         start_new_draft()
+    def fire_chicken_draft_submit_through_pasting():
+        '''Submits the draft window draft through pasting'''
+        with clip.revert():
+            content = actions.user.draft_get_text()
+            clip.set_text(content)
+            actions.user.draft_hide()
+            sleep_draft_submit_delay()
+            actions.edit.paste()
+            sleep_draft_paste_delay()
+
+        
     
 def start_new_draft():
     open_draft()
