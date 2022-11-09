@@ -14,3 +14,7 @@ class Actions:
         '''Enables command mode from dictation mode'''
         actions.mode.disable("dictation")
         actions.mode.enable("command")
+    def fire_chicken_enable_dictation_mode_and_draft_window_from_command_mode():
+        '''Enables dictation mode from command mode and opens the draft window'''
+        actions.user.fire_chicken_dictation_enable_dictation_mode_from_command_mode()
+        actions.user.fire_chicken_dictation_start_new_draft()
