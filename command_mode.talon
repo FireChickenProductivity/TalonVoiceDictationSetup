@@ -1,5 +1,8 @@
 mode: command
 -
-^(dictate|drafting) [this|here]$:
-    user.fire_chicken_dictation_enable_dictation_mode_from_command_mode()
-    user.fire_chicken_dictation_start_new_draft()
+^(dictate|drafting)$:
+    user.fire_chicken_enable_dictation_mode_and_draft_window_from_command_mode()
+
+^(dictate|drafting) <user.raw_prose>:
+    user.fire_chicken_enable_dictation_mode_and_draft_window_from_command_mode()
+    user.dictation_insert(raw_prose)
