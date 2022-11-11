@@ -22,6 +22,11 @@ push (last|finished|done|finish|push):
   user.fire_chicken_dictation_draft_submit()
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
 
+slap slap:
+  user.fire_chicken_dictation_draft_submit()
+  user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
+  key(enter)
+
 paste paste: 
   user.fire_chicken_draft_submit_through_pasting()
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
