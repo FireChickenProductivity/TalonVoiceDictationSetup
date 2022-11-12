@@ -52,7 +52,10 @@ class Actions:
             sleep_draft_submit_delay()
             actions.edit.paste()
             sleep_draft_paste_delay()
-
+    def fire_chicken_dictation_draft_edit_selected_text():
+        '''Opens the draft window with the currently selected text'''
+        selected_text: str = actions.edit.selected_text()
+        actions.user.draft_show(selected_text)
         
     
 def start_new_draft():
