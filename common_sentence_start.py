@@ -22,7 +22,9 @@ context.lists['user.fire_chicken_dictation_common_sentence_start'] = {
     'An': 'An',
     'How': 'How',
     'My': 'My',
+    'It': 'It',
 }
+
 @module.capture(rule = '{user.fire_chicken_dictation_common_sentence_start}')
 def fire_chicken_dictation_common_sentence_start(m) -> str:
     return m.fire_chicken_dictation_common_sentence_start
