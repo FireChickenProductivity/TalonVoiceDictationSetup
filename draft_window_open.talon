@@ -27,9 +27,12 @@ push push:
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
 
 slap slap:
-  user.fire_chicken_dictation_draft_submit()
-  user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
+  user.fire_chicken_exit_dictation_mode_drafting_through_submission()
   key(enter)
+
+jump jump: 
+  user.fire_chicken_exit_dictation_mode_drafting_through_submission()
+  key(end)
 
 paste paste: 
   user.fire_chicken_draft_submit_through_pasting()
