@@ -22,3 +22,7 @@ class Actions:
         ''''''
         actions.user.fire_chicken_dictation_enable_dictation_mode_from_command_mode()
         actions.user.fire_chicken_dictation_draft_edit_selected_text()
+    def fire_chicken_exit_dictation_mode_drafting_through_submission():
+        ''''''
+        actions.user.fire_chicken_dictation_draft_submit()
+        actions.user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
