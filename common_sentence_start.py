@@ -24,6 +24,14 @@ context.lists['user.fire_chicken_dictation_common_sentence_start'] = {
     'How': 'How',
     'My': 'My',
     'It': 'It',
+    'You': 'You',
+    'Because': 'Because',
+    'Nonetheless': 'Nonetheless',
+    'Unless': 'Unless',
+    'As': 'As',
+    'He': 'He',
+    'She': 'She',
+    'They': 'They',
 }
 
 @module.capture(rule = '{user.fire_chicken_dictation_common_sentence_start}')
@@ -35,5 +43,6 @@ class Actions:
     def fire_chicken_dictation_launch_dictation_drafting_with_common_sentence_start(start: str, additional_text: str):
         '''Switches to dictation mode drafting and inserts the specified text'''
         actions.user.fire_chicken_enable_dictation_mode_and_draft_window_from_command_mode()
-        actions.user.dictation_insert(start + ' ' + additional_text)
+        actions.user.dictation_insert(start)
+        actions.user.dictation_insert(additional_text)
 
