@@ -12,7 +12,9 @@ draft submit:
 
 push space: user.fire_chicken_dictation_send_draft_text_with_ending(' ')
 push sentence: user.fire_chicken_dictation_send_draft_text_with_ending('. ')
-line line: user.fire_chicken_dictation_send_draft_text_with_ending('\n')
+push line: user.fire_chicken_dictation_send_draft_text_with_ending('\n')
+shine shine:
+  user.fire_chicken_dictation_send_draft_text_with_new_line_and_save()
 
 
 push question: user.fire_chicken_dictation_send_draft_text_with_ending('? ')
