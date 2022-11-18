@@ -12,13 +12,15 @@ draft submit:
 
 push space: user.fire_chicken_dictation_send_draft_text_with_ending(' ')
 push sentence: user.fire_chicken_dictation_send_draft_text_with_ending('. ')
-push line: user.fire_chicken_dictation_send_draft_text_with_ending('\n')
+line line: user.fire_chicken_dictation_send_draft_text_with_ending('\n')
+
+
 push question: user.fire_chicken_dictation_send_draft_text_with_ending('? ')
 push (exclaim|exclamation [(point|mark)]): user.fire_chicken_dictation_send_draft_text_with_ending('! ')
 push (Para|paragraph|pair): user.fire_chicken_dictation_send_draft_text_with_ending('\n\t')
 push sentence (Para|paragraph|pair): user.fire_chicken_dictation_send_draft_text_with_ending('.\n\t')
 
-push (last|finished|done|finish|push):
+push push:
   user.fire_chicken_dictation_draft_submit()
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
 
@@ -31,6 +33,6 @@ paste paste:
   user.fire_chicken_draft_submit_through_pasting()
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
 
-discard discard:
+discard discard | drop drop:
   user.draft_hide()
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
