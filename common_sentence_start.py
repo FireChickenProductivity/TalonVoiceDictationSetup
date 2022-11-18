@@ -32,6 +32,9 @@ context.lists['user.fire_chicken_dictation_common_sentence_start'] = {
     'He': 'He',
     'She': 'She',
     'They': 'They',
+    'My': 'My',
+    'His': 'His',
+    'Her': 'Her',
 }
 
 @module.capture(rule = '{user.fire_chicken_dictation_common_sentence_start}')
