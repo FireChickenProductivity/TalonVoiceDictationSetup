@@ -7,6 +7,7 @@ context = Context()
 context.lists['user.fire_chicken_dictation_common_sentence_start'] = {
     'I': 'I',
     'This': 'This',
+    'That': 'That',
     'Is': 'Is',
     'The': 'The',
     'We': 'We',
