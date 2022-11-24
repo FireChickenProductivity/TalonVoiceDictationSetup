@@ -1,6 +1,7 @@
 from talon import Module, actions, Context
 
 module = Module()
+module.tag('fire_chicken_common_sentence_start', desc = 'Allows commands that switch to dictation drafting when saying a common sentence start')
 module.list('fire_chicken_dictation_common_sentence_start', desc = 'Words commonly used to start a sentence')
 
 context = Context()
