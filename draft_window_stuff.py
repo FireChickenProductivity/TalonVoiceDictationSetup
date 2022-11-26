@@ -40,6 +40,11 @@ class Actions:
         '''Submits the draft window text alongside the ending text, reopens the draft window, and then selects the text there'''
         actions.user.fire_chicken_dictation_draft_submit_with(ending)
         start_new_draft()
+    def fire_chicken_dictation_send_draft_text_with_keypress(keypress: str):
+        '''Submits the draft window text, does the specified keypress, reopens the draft window, and then selects the text there'''
+        actions.user.fire_chicken_dictation_draft_submit()
+        actions.key(keypress)
+        start_new_draft()
     def fire_chicken_dictation_send_draft_text_with_new_line_and_save():
         '''Submits the draft window text, starts a newline, saves, reopens the draft window, and then selects the text there'''
         actions.user.fire_chicken_dictation_draft_submit_with('\n')   
@@ -61,7 +66,10 @@ class Actions:
         '''Opens the draft window with the currently selected text'''
         selected_text: str = actions.edit.selected_text()
         actions.user.draft_show(selected_text)
-        
+    def fire_chicken_dictation_insert_draft_window_text():
+        '''Types the draft window draft'''
+        content = actions.user.draft_get_text()
+        actions.insert(content)
     
 def start_new_draft():
     open_draft()
