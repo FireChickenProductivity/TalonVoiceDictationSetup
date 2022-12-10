@@ -20,6 +20,15 @@ replace <user.draft_anchor> with <user.text>:
 (post | cursor after) <user.draft_anchor>:
   user.draft_position_caret("{draft_anchor}", 1)
 
+trim trim <user.draft_anchor>:
+  user.draft_position_caret("{draft_anchor}", 1)
+  key(backspace)
+
+trim trim <number_small> <user.draft_anchor>:
+  user.draft_position_caret("{draft_anchor}", 1)
+  key(backspace)
+  repeat(number_small - 1)
+
 # Select a whole word
 (take | select) <user.draft_anchor>:
   user.draft_select("{draft_anchor}")
@@ -50,14 +59,24 @@ tail tail <user.draft_anchor> (through | past) <user.draft_anchor>:
   user.draft_select("{draft_anchor_1}", "{draft_anchor_2}")
 
 # Delete a word
-(change | chuck | clear) <user.draft_anchor>:
+(change | clear) <user.draft_anchor>:
   user.draft_select("{draft_anchor}", "", 1)
   key(backspace)
 
+chuck <user.draft_anchor>:
+  user.draft_select("{draft_anchor}", "", 1)
+  key(backspace)
+  edit.down()
+
 # Delete a range of words
-(change | chuck | clear) <user.draft_anchor> (through | past) <user.draft_anchor>:
+(change | clear) <user.draft_anchor> (through | past) <user.draft_anchor>:
   user.draft_select(draft_anchor_1, draft_anchor_2, 1)
   key(backspace)
+
+chuck <user.draft_anchor> (through | past) <user.draft_anchor>:
+  user.draft_select(draft_anchor_1, draft_anchor_2, 1)
+  key(backspace)
+  edit.down()
 
 # reformat word
 <user.formatters> word <user.draft_anchor>:
