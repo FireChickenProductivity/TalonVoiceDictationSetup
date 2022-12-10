@@ -16,9 +16,19 @@ replace <user.draft_anchor> with <user.text>:
 (pre | cursor | cursor before) <user.draft_anchor>:
   user.draft_position_caret("{draft_anchor}")
 
+pre pre <number_small> <user.draft_anchor>:
+  user.draft_position_caret("{draft_anchor}")
+  edit.right()
+  repeat(number_small - 1)
+
 # Position cursor after word
 (post | cursor after) <user.draft_anchor>:
   user.draft_position_caret("{draft_anchor}", 1)
+
+post post <number_small> <user.draft_anchor>:
+  user.draft_position_caret("{draft_anchor}", 1)
+  edit.left()
+  repeat(number_small - 1)
 
 trim trim <user.draft_anchor>:
   user.draft_position_caret("{draft_anchor}", 1)
