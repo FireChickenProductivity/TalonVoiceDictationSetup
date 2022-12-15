@@ -50,7 +50,7 @@ trim trim <number_small> <user.draft_anchor>:
 ^(phone phone|fun fun) hide$:
   user.homophones_hide()
 
-tail tail <user.draft_anchor>:
+bring bring <user.draft_anchor>:
   original_position = user.fire_chicken_draft_window_compute_position()
   user.fire_chicken_dictation_sleep_pre_anchor_move_delay()
   user.draft_select("{draft_anchor}")
@@ -59,12 +59,13 @@ tail tail <user.draft_anchor>:
   insert(' ' + text)
   
 
-tail tail <user.draft_anchor> (through | past) <user.draft_anchor>:
+bring bring <user.draft_anchor> (through | past) <user.draft_anchor>:
+  original_position = user.fire_chicken_draft_window_compute_position()
+  user.fire_chicken_dictation_sleep_pre_anchor_move_delay()
   user.draft_select("{draft_anchor_1}", "{draft_anchor_2}")
-  edit.copy()
-  edit.down()
-  key(space)
-  edit.paste()
+  text = user.fire_chicken_dictation_get_selected_text()
+  user.fire_chicken_draft_window_go_to_position(original_position)
+  insert(' ' + text)
 
 # Select a range of words
 (take | select) <user.draft_anchor> (through | past) <user.draft_anchor>:
