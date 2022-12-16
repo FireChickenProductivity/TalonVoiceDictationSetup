@@ -56,7 +56,7 @@ bring bring <user.draft_anchor>:
   user.draft_select("{draft_anchor}")
   text = user.fire_chicken_dictation_get_selected_text()
   user.fire_chicken_draft_window_go_to_position(original_position)
-  insert(' ' + text)
+  user.dictation_insert(' ' + text)
   
 
 bring bring <user.draft_anchor> (through | past) <user.draft_anchor>:
@@ -65,7 +65,7 @@ bring bring <user.draft_anchor> (through | past) <user.draft_anchor>:
   user.draft_select("{draft_anchor_1}", "{draft_anchor_2}")
   text = user.fire_chicken_dictation_get_selected_text()
   user.fire_chicken_draft_window_go_to_position(original_position)
-  insert(' ' + text)
+  user.dictation_insert(' ' + text)
 
 # Select a range of words
 (take | select) <user.draft_anchor> (through | past) <user.draft_anchor>:
