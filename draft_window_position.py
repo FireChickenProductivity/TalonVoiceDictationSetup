@@ -6,16 +6,15 @@ class Actions:
     def fire_chicken_draft_window_compute_position() -> int:
         ''''''
         actions.edit.extend_line_start()
-        selected_text = actions.user.fire_chicken_dictation_get_selected_text()
+        position = compute_number_of_selected_words()
         actions.edit.right()
-        position = len(selected_text.split(' ')) + 1
         return position
     
     def fire_chicken_draft_window_go_to_position(position: int):
         ''''''
         actions.edit.extend_line_start()
         if position > 0:
-            for i in range(position - 1):
+            for i in range(position):
                 actions.edit.word_right()
 
     def fire_chicken_draft_window_clear_draft_window_anchors_and_return_to_original_position(start_anchor: str, ending_anchor: str = ''):
@@ -36,7 +35,8 @@ def compute_number_of_selected_words():
     selected_text = actions.user.fire_chicken_dictation_get_selected_text()
     selected_text_without_trailing_spaces = selected_text.strip()
     number_of_words = selected_text_without_trailing_spaces.count(' ') + 1
-    print(f'number_of_words: {number_of_words}')
+    if selected_text_without_trailing_spaces == '':
+        number_of_words = 0
     return number_of_words
 
 def compute_number_of_selected_words_from_beginning():
