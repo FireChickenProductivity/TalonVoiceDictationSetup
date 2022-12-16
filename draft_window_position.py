@@ -14,7 +14,7 @@ class Actions:
     
     def fire_chicken_draft_window_go_to_position(position: int):
         ''''''
-        actions.edit.extend_line_start()
+        actions.edit.line_start()
         if position > 0:
             for i in range(position):
                 actions.edit.word_right()
