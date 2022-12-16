@@ -16,10 +16,19 @@ draft_paste_delay = module.setting(
     desc = 'How long to wait after pasting the draft window text to let the clipboard revert properly',
 )
 
+pre_anchor_move_delay = module.setting(
+    'fire_chicken_dictation_pre_anchor_move_delay',
+    type = int,
+    default = 200,
+    desc = 'How long to wait before moving to an anchor under certain circumstances to avoid bugs',
+)
+
 def sleep_draft_submit_delay():
     sleep_delay_setting_amount(draft_submit_delay)
 def sleep_draft_paste_delay():
     sleep_delay_setting_amount(draft_paste_delay)
+def sleep_pre_anchor_move_delay():
+    sleep_delay_setting_amount(pre_anchor_move_delay)
 
 def sleep_delay_setting_amount(setting):
     actions.sleep(f'{setting.get()}ms')
@@ -70,6 +79,9 @@ class Actions:
         '''Types the draft window draft'''
         content = actions.user.draft_get_text()
         actions.insert(content)
+    def fire_chicken_dictation_sleep_pre_anchor_move_delay():
+        ''''''
+        sleep_pre_anchor_move_delay()
     
 def start_new_draft():
     open_draft()

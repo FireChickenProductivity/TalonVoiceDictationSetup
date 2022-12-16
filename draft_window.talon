@@ -50,19 +50,22 @@ trim trim <number_small> <user.draft_anchor>:
 ^(phone phone|fun fun) hide$:
   user.homophones_hide()
 
-tail tail <user.draft_anchor>:
+bring bring <user.draft_anchor>:
+  original_position = user.fire_chicken_draft_window_compute_position()
+  user.fire_chicken_dictation_sleep_pre_anchor_move_delay()
   user.draft_select("{draft_anchor}")
-  edit.copy()
-  edit.down()
-  key(space)
-  edit.paste()
+  text = user.fire_chicken_dictation_get_selected_text()
+  user.fire_chicken_draft_window_go_to_position(original_position)
+  user.dictation_insert(' ' + text)
+  
 
-tail tail <user.draft_anchor> (through | past) <user.draft_anchor>:
+bring bring <user.draft_anchor> (through | past) <user.draft_anchor>:
+  original_position = user.fire_chicken_draft_window_compute_position()
+  user.fire_chicken_dictation_sleep_pre_anchor_move_delay()
   user.draft_select("{draft_anchor_1}", "{draft_anchor_2}")
-  edit.copy()
-  edit.down()
-  key(space)
-  edit.paste()
+  text = user.fire_chicken_dictation_get_selected_text()
+  user.fire_chicken_draft_window_go_to_position(original_position)
+  user.dictation_insert(' ' + text)
 
 # Select a range of words
 (take | select) <user.draft_anchor> (through | past) <user.draft_anchor>:
@@ -74,9 +77,7 @@ tail tail <user.draft_anchor> (through | past) <user.draft_anchor>:
   key(backspace)
 
 chuck <user.draft_anchor>:
-  user.draft_select("{draft_anchor}", "", 1)
-  key(backspace)
-  edit.down()
+  user.fire_chicken_draft_window_clear_draft_window_anchors_and_return_to_original_position("{draft_anchor}")
 
 # Delete a range of words
 (change | clear) <user.draft_anchor> (through | past) <user.draft_anchor>:
@@ -84,9 +85,7 @@ chuck <user.draft_anchor>:
   key(backspace)
 
 chuck <user.draft_anchor> (through | past) <user.draft_anchor>:
-  user.draft_select(draft_anchor_1, draft_anchor_2, 1)
-  key(backspace)
-  edit.down()
+  user.fire_chicken_draft_window_clear_draft_window_anchors_and_return_to_original_position(draft_anchor_1, draft_anchor_2)
 
 # reformat word
 <user.formatters> word <user.draft_anchor>:
@@ -97,3 +96,4 @@ chuck <user.draft_anchor> (through | past) <user.draft_anchor>:
 <user.formatters> <user.draft_anchor> (through | past) <user.draft_anchor>:
     user.draft_select(draft_anchor_1, draft_anchor_2, 1)
     user.formatters_reformat_selection(user.formatters)
+
