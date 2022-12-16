@@ -85,9 +85,7 @@ chuck <user.draft_anchor>:
   key(backspace)
 
 chuck <user.draft_anchor> (through | past) <user.draft_anchor>:
-  user.draft_select(draft_anchor_1, draft_anchor_2, 1)
-  key(backspace)
-  edit.down()
+  user.fire_chicken_draft_window_clear_draft_window_anchors_and_return_to_original_position(draft_anchor_1, draft_anchor_2)
 
 # reformat word
 <user.formatters> word <user.draft_anchor>:
