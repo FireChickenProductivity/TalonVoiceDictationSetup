@@ -5,9 +5,11 @@ module = Module()
 class Actions:
     def fire_chicken_draft_window_compute_position() -> int:
         ''''''
+        actions.key('space')
         actions.edit.extend_line_start()
         position = compute_number_of_selected_words()
         actions.edit.right()
+        actions.key('backspace')
         return position
     
     def fire_chicken_draft_window_go_to_position(position: int):
@@ -24,7 +26,7 @@ class Actions:
         actions.user.draft_select(start_anchor, ending_anchor, 1)
         number_of_selected_words = compute_number_of_selected_words()
         actions.key('backspace')
-        number_of_words_from_beginning = compute_number_of_selected_words_from_beginning()
+        number_of_words_from_beginning = actions.user.fire_chicken_draft_window_compute_position()
         actions.edit.line_start()
         if deleted_text_before_original_position(original_position, number_of_selected_words, number_of_words_from_beginning):
             actions.user.fire_chicken_draft_window_go_to_position(original_position - number_of_selected_words)
@@ -39,10 +41,6 @@ def compute_number_of_selected_words():
         number_of_words = 0
     return number_of_words
 
-def compute_number_of_selected_words_from_beginning():
-    actions.edit.extend_line_start()
-    number_of_words = compute_number_of_selected_words()
-    return number_of_words
 
 def deleted_text_before_original_position(original_position, number_of_deleted_words, number_of_words_from_beginning_after_deletion):
-    return number_of_words_from_beginning_after_deletion + number_of_deleted_words < original_position
+    return number_of_words_from_beginning_after_deletion + number_of_deleted_words <= original_position
