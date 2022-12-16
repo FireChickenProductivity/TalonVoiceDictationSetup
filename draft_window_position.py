@@ -33,6 +33,16 @@ class Actions:
         else:
             actions.user.fire_chicken_draft_window_go_to_position(original_position)
 
+    def fire_chicken_dictation_insert_space_if_position_nonzero(position: int):
+        ''''''
+        if position != 0:
+            actions.key('space')
+        
+    def fire_chicken_dictation_insert_space_if_position_zero(position: int):
+        ''''''
+        if position == 0:
+            actions.key('space')
+
 def compute_number_of_selected_words():
     selected_text = actions.user.fire_chicken_dictation_get_selected_text()
     selected_text_without_trailing_spaces = selected_text.strip()
