@@ -39,8 +39,29 @@ def compute_possible_corrections_for_substring(text: str, relative_text_position
     if homophones != None:
         for homophone in homophones:
             if homophone != text:
-                result.append(Correction(relative_text_position, text, homophone))
+                replacement_text: str = return_copy_of_string_with_same_capitalization_as(homophone, text)
+                result.append(Correction(relative_text_position, text, replacement_text))
     return result
+
+def return_copy_of_string_with_same_capitalization_as(original: str, text_with_target_capitalization: str) -> str:
+    copy: str = original[:]
+    if text_with_target_capitalization[0].isupper():
+        copy = original[0].upper()
+        if len(original) > 1:
+            copy += original[1:]
+    all_upper_case: bool = True
+    all_lowercase: bool = True
+    for character in text_with_target_capitalization:
+        if character.isalpha():
+            if character.isupper():
+                all_lowercase = False
+            else:
+                all_upper_case = False
+    if all_upper_case:
+        copy = original.upper()
+    if all_lowercase:
+        copy = original.lower()
+    return copy
 
 def compute_possible_corrections_for_text(text: str):
     corrections = []
