@@ -6,6 +6,14 @@ class RelativeTextPosition:
         self.characters_right = characters_right
         self.number_of_characters = number_of_characters
     
+    def select_text(self):
+        for i in range(self.words_left):
+            actions.edit.word_left()
+        for i in range(self.characters_right):
+            actions.edit.right()
+        for i in range(self.number_of_characters):
+            actions.edit.extend_right()
+
     def __str__(self):
         return f'{self.characters_right} words left {self.characters_right} characters right {self.number_of_characters} characters'
     
@@ -82,6 +90,15 @@ class Actions:
     def fire_chicken_hide_correction_menu():
         ''''''
         gui.hide()
+    
+    def fire_chicken_make_correction(number: int):
+        ''''''
+        if number - 1 < len(corrections):
+            correction = corrections[number - 1]
+            position = correction.relative_position
+            position.select_text()
+            actions.insert(correction.replacement)
+
 
 corrections = []
 last_phrase = ''
