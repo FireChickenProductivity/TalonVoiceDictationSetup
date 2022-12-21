@@ -101,3 +101,4 @@ chuck <user.draft_anchor> (through | past) <user.draft_anchor>:
     user.draft_select(draft_anchor_1, draft_anchor_2, 1)
     user.formatters_reformat_selection(user.formatters)
 
+core core <number_small>: user.fire_chicken_make_correction(number_small)
