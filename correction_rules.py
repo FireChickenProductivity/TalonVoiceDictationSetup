@@ -151,7 +151,7 @@ class SimpleCorrectionRules:
 def compute_possible_corrections_for_substring(text: str, relative_text_position):
     result = []
     homophones = actions.user.homophones_get(text)
-    if homophones != None:
+    if homophones != None and len(text) > 1:
         for homophone in homophones:
             if homophone != text:
                 replacement_text: str = return_copy_of_string_with_same_capitalization_as(homophone, text)
