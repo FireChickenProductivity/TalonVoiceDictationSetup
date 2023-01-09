@@ -51,6 +51,11 @@ class Actions:
             actions.insert(correction.replacement)
             update_text_to_correct_with_correction(correction)
     
+    def fire_chicken_correct_line():
+        ''''''
+        actions.edit.select_line()
+        actions.user.fire_chicken_correct_selected_text()
+
     def fire_chicken_correct_selected_text():
         ''''''
         selected_text = actions.user.fire_chicken_dictation_get_selected_text()
