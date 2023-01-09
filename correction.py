@@ -57,6 +57,12 @@ class Actions:
         actions.edit.extend_word_left()
         actions.user.fire_chicken_correct_selected_text()
 
+    def fire_chicken_correct_word_right(number: int):
+        ''''''
+        actions.user.words_right(number - 1)
+        actions.edit.extend_word_right()
+        actions.user.fire_chicken_correct_selected_text()
+
     def fire_chicken_correct_line():
         ''''''
         actions.edit.select_line()
