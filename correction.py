@@ -1,4 +1,4 @@
-from talon import Module, actions, imgui
+from talon import Module, actions, imgui, Context
 from .correction_rules import *
 
 module = Module()
@@ -12,6 +12,17 @@ automatically_show_correction_menu = module.setting(
 def should_automatically_show_correction_menu():
     return automatically_show_correction_menu.get() != 0
 
+module.tag('fire_chicken_correction')
+correction_context = Context()
+
+def activate_correction_tag():
+    global correction_context
+    correction_context.tags = ['user.fire_chicken_correction']
+
+def deactivate_correction_tag():
+    global correction_context
+    correction_context.tags = []
+
 text_to_correct = ''
 corrections = []
 @module.action_class
@@ -20,10 +31,12 @@ class Actions:
         ''''''
         if should_automatically_show_correction_menu():
             gui.show()
+            activate_correction_tag()
     
     def fire_chicken_hide_correction_menu():
         ''''''
         gui.hide()
+        deactivate_correction_tag()
     
     def fire_chicken_make_correction(number: int):
         ''''''
