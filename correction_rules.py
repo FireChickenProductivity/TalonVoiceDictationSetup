@@ -152,10 +152,7 @@ def compute_possible_corrections_for_substring(text: str, relative_text_position
     result = []
     homophones = actions.user.homophones_get(text)
     if homophones != None and len(text) > 1:
-        for homophone in homophones:
-            if homophone.lower() != text.lower():
-                replacement_text: str = return_copy_of_string_with_same_capitalization_as(homophone, text)
-                result.append(Correction(relative_text_position, text, replacement_text))
+        add_homophone_corrections_to_list(homophones, result, relative_text_position, text)
     simple_corrections = simple_correction_rules.compute_corrections_for_text(text, relative_text_position)
     if len(simple_corrections) > 0:
         result.extend(simple_corrections)
