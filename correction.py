@@ -24,6 +24,7 @@ def deactivate_correction_tag():
     correction_context.tags = []
 
 text_to_correct = ''
+text_to_correct_override = ''
 corrections = []
 @module.action_class
 class Actions:
@@ -48,13 +49,25 @@ class Actions:
             position = correction.relative_position
             position.select_text()
             actions.insert(correction.replacement)
-            update_text_to_correct(correction)
+            update_text_to_correct_with_correction(correction)
+    
+    def fire_chicken_correct_selected_text():
+        ''''''
+        selected_text = actions.user.fire_chicken_dictation_get_selected_text()
+        actions.user.fire_chicken_override_correction_text(selected_text)
+        actions.user.fire_chicken_show_correction_menu_manually()
+        actions.edit.right()
+        
+    def fire_chicken_override_correction_text(new_correction_text: str):
+        ''''''
+        global text_to_correct_override
+        text_to_correct_override = new_correction_text
 
 def show_correction_menu():
     gui.show()
     activate_correction_tag()
 
-def update_text_to_correct(correction: Correction):
+def update_text_to_correct_with_correction(correction: Correction):
     global text_to_correct
     position: RelativeTextPosition = correction.relative_position
     original_text_start, original_text_ending = position.find_position_coordinates_in_string(text_to_correct)
@@ -67,12 +80,14 @@ last_phrase = ''
 @imgui.open(y=0)
 def gui(gui: imgui.GUI):
     new_phrase = actions.user.get_last_phrase()
-    global last_phrase
-    global text_to_correct
-    global corrections
+    global last_phrase, text_to_correct, corrections, text_to_correct_override
     if new_phrase != last_phrase:
         last_phrase = new_phrase
         text_to_correct = last_phrase
+        corrections = compute_possible_corrections_for_text(text_to_correct)
+    if text_to_correct_override != '':
+        text_to_correct = text_to_correct_override
+        text_to_correct_override = ''
         corrections = compute_possible_corrections_for_text(text_to_correct)
     gui.text("Correction Menu")
     gui.line()
