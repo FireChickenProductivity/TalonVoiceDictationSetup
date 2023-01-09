@@ -1,14 +1,25 @@
 from talon import Module, actions, imgui
 from .correction_rules import *
 
+module = Module()
+automatically_show_correction_menu = module.setting(
+    'fire_chicken_automatically_show_correction_menu',
+    type = int,
+    default = 1,
+    desc = 'Whether or not to automatically show the correction menu under certain circumstances. A value of 0 means false, and other values mean true.'
+)
+
+def should_automatically_show_correction_menu():
+    return automatically_show_correction_menu.get() != 0
+
 text_to_correct = ''
 corrections = []
-module = Module()
 @module.action_class
 class Actions:
     def fire_chicken_show_correction_menu():
         ''''''
-        gui.show()
+        if should_automatically_show_correction_menu():
+            gui.show()
     
     def fire_chicken_hide_correction_menu():
         ''''''
