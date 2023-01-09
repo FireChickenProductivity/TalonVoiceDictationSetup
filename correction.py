@@ -28,10 +28,13 @@ corrections = []
 @module.action_class
 class Actions:
     def fire_chicken_show_correction_menu():
-        ''''''
+        '''Used to automatically open the correction menu in certain contexts'''
         if should_automatically_show_correction_menu():
-            gui.show()
-            activate_correction_tag()
+            show_correction_menu()
+        
+    def fire_chicken_show_correction_menu_manually():
+        '''Used to manually open the correction menu'''
+        show_correction_menu()
     
     def fire_chicken_hide_correction_menu():
         ''''''
@@ -46,7 +49,11 @@ class Actions:
             position.select_text()
             actions.insert(correction.replacement)
             update_text_to_correct(correction)
-            
+
+def show_correction_menu():
+    gui.show()
+    activate_correction_tag()
+
 def update_text_to_correct(correction: Correction):
     global text_to_correct
     position: RelativeTextPosition = correction.relative_position
