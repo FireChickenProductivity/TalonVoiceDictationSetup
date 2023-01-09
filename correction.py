@@ -51,6 +51,12 @@ class Actions:
             actions.insert(correction.replacement)
             update_text_to_correct_with_correction(correction)
     
+    def fire_chicken_correct_word_left(number: int):
+        ''''''
+        actions.user.words_left(number - 1)
+        actions.edit.extend_word_left()
+        actions.user.fire_chicken_correct_selected_text()
+
     def fire_chicken_correct_line():
         ''''''
         actions.edit.select_line()
@@ -58,8 +64,8 @@ class Actions:
 
     def fire_chicken_correct_selected_text():
         ''''''
-        selected_text = actions.user.fire_chicken_dictation_get_selected_text()
-        actions.user.fire_chicken_override_correction_text(selected_text)
+        selected_text: str = actions.user.fire_chicken_dictation_get_selected_text()
+        actions.user.fire_chicken_override_correction_text(selected_text.strip())
         actions.user.fire_chicken_show_correction_menu_manually()
         actions.edit.right()
         
