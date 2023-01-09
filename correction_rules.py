@@ -153,13 +153,69 @@ def compute_possible_corrections_for_substring(text: str, relative_text_position
     homophones = actions.user.homophones_get(text)
     if homophones != None and len(text) > 1:
         for homophone in homophones:
-            if homophone != text:
+            if homophone.lower() != text.lower():
                 replacement_text: str = return_copy_of_string_with_same_capitalization_as(homophone, text)
                 result.append(Correction(relative_text_position, text, replacement_text))
     simple_corrections = simple_correction_rules.compute_corrections_for_text(text, relative_text_position)
     if len(simple_corrections) > 0:
         result.extend(simple_corrections)
     return result
+
+def compute_single_character_homophone_corrections(text: str):
+    result = []
+    words_left_for_index = compute_words_left_list(text)
+    characters_right_for_index = compute_characters_right_list(text, words_left_for_index)
+    for index, character in enumerate(text):
+        homophones = computes_single_character_homophones_with_correct_capitalizations(character)
+        if should_add_single_character_homophone_corrections(homophones, index, text):
+            relative_text_position = RelativeTextPosition(words_left_for_index[index], characters_right_for_index[index], 1)
+            add_homophone_corrections_to_list(homophones, result, relative_text_position, character)
+    return result
+
+def computes_single_character_homophones_with_correct_capitalizations(character: str):
+    if character.isupper():
+        return compute_homophones_with_all_capitalizations(character)
+    return get_homophones_for(character)
+
+def compute_homophones_with_all_capitalizations(text: str):
+    homophones = get_homophones_for(text)
+    result = []
+    for homophone in homophones:
+        capitalizations_of_homophone = [homophone.lower(), homophone.capitalize(), homophone.upper()]
+        result.extend(capitalizations_of_homophone)
+    return result
+
+def get_homophones_for(word: str):
+    homophones = actions.user.homophones_get(word)
+    if homophones == None:
+        homophones = []
+    return homophones
+
+def should_add_single_character_homophone_corrections(homophones, index, text):
+    return homophones != None and surrounding_index_in_text_not_alpha(index, text)
+
+def index_is_text_inside_boundary(index, text):
+    return index == 0 or index == len(text) - 1
+
+def surrounding_index_in_text_not_alpha(index, text: str):
+    return not ((index > 0 and text[index - 1].isalpha()) or (index < len(text) - 1 and text[index + 1].isalpha()))
+
+def add_homophone_corrections_to_list(homophones, list, relative_text_position, original: str):
+    for homophone in homophones:
+        if homophone_differs_from_original(homophone, original):
+            list.append(compute_correction(homophone, original, relative_text_position))
+
+def homophone_differs_from_original(homophone: str, original: str):
+    return homophone.lower() != original.lower()
+
+def compute_correction_with_same__capitalization_as_original(new_text: str, original: str, relative_text_position):
+    replacement_text: str = return_copy_of_string_with_same_capitalization_as(new_text, original)
+    correction = compute_correction(replacement_text, original, relative_text_position)
+    return correction
+
+def compute_correction(new_text: str, original: str, relative_text_position):
+    correction = Correction(relative_text_position, original, new_text)
+    return correction
 
 def return_copy_of_string_with_same_capitalization_as(original: str, text_with_target_capitalization: str) -> str:
     copy: str = original[:]
@@ -189,6 +245,9 @@ def compute_possible_corrections_for_text(text: str):
         for j in range(i, len(text)):
             position = RelativeTextPosition(words_left_for_index[i], characters_right_for_index[i], j - i + 1)
             corrections.extend(compute_possible_corrections_for_substring(text[i:j+1], position))
+    single_character_homophone_corrections = compute_single_character_homophone_corrections(text)
+    if len(single_character_homophone_corrections) > 0:
+        corrections.extend(single_character_homophone_corrections)
     return corrections
 
 def compute_words_left_list(text: str):
