@@ -39,5 +39,5 @@ paste paste:
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()
 
 discard discard | drop drop:
-  user.draft_hide()
+  user.fire_chicken_dictation_close_draft()
   user.fire_chicken_dictation_enable_command_mode_from_dictation_mode()

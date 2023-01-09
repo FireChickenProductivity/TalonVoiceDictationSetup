@@ -38,7 +38,7 @@ class Actions:
     def fire_chicken_dictation_draft_submit():
         '''Submits the draft window draft using the delay setting'''
         content = actions.user.draft_get_text()
-        actions.user.draft_hide()
+        actions.user.fire_chicken_dictation_close_draft()
         sleep_draft_submit_delay()
         actions.insert(content)
     def fire_chicken_dictation_draft_submit_with(ending: str):
@@ -82,6 +82,9 @@ class Actions:
     def fire_chicken_dictation_sleep_pre_anchor_move_delay():
         ''''''
         sleep_pre_anchor_move_delay()
+    def fire_chicken_dictation_close_draft():
+        ''''''
+        close_draft()
     
 def start_new_draft():
     open_draft()
@@ -90,4 +93,9 @@ def start_new_draft():
 def open_draft():
     actions.user.draft_hide()
     actions.user.draft_show()
+    actions.user.fire_chicken_show_correction_menu()
+
+def close_draft():
+    actions.user.draft_hide()
+    actions.user.fire_chicken_hide_correction_menu()
 
