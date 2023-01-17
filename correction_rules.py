@@ -152,7 +152,7 @@ def compute_possible_corrections_for_substring(text: str, relative_text_position
     result = []
     homophones = actions.user.homophones_get(text)
     if homophones != None and len(text) > 1:
-        add_homophone_corrections_to_list(homophones, result, relative_text_position, text)
+        add_homophone_corrections_to_list(homophones, result, relative_text_position, text, use_same_capitalization_as_original = True)
     simple_corrections = simple_correction_rules.compute_corrections_for_text(text, relative_text_position)
     if len(simple_corrections) > 0:
         result.extend(simple_corrections)
@@ -197,15 +197,19 @@ def index_is_text_inside_boundary(index, text):
 def surrounding_index_in_text_not_alpha(index, text: str):
     return not ((index > 0 and text[index - 1].isalpha()) or (index < len(text) - 1 and text[index + 1].isalpha()))
 
-def add_homophone_corrections_to_list(homophones, list, relative_text_position, original: str):
+def add_homophone_corrections_to_list(homophones, list, relative_text_position, original: str, *, use_same_capitalization_as_original: bool = False):
     for homophone in homophones:
         if homophone_differs_from_original(homophone, original):
-            list.append(compute_correction(homophone, original, relative_text_position))
+            if use_same_capitalization_as_original:
+                corrections = compute_correction_with_same_capitalization_as_original(homophone, original, relative_text_position)
+            else:
+                corrections = compute_correction(homophone, original, relative_text_position)
+            list.append(corrections)
 
 def homophone_differs_from_original(homophone: str, original: str):
     return homophone.lower() != original.lower()
 
-def compute_correction_with_same__capitalization_as_original(new_text: str, original: str, relative_text_position):
+def compute_correction_with_same_capitalization_as_original(new_text: str, original: str, relative_text_position):
     replacement_text: str = return_copy_of_string_with_same_capitalization_as(new_text, original)
     correction = compute_correction(replacement_text, original, relative_text_position)
     return correction
