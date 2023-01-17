@@ -98,14 +98,18 @@ last_phrase = ''
 def gui(gui: imgui.GUI):
     new_phrase = actions.user.get_last_phrase()
     global last_phrase, text_to_correct, corrections, text_to_correct_override
-    if new_phrase != last_phrase:
-        last_phrase = new_phrase
-        text_to_correct = last_phrase
-        corrections = compute_possible_corrections_for_text(text_to_correct)
-    if text_to_correct_override != '':
-        text_to_correct = text_to_correct_override
-        text_to_correct_override = ''
-        corrections = compute_possible_corrections_for_text(text_to_correct)
+    try:
+        if new_phrase != last_phrase:
+            last_phrase = new_phrase
+            text_to_correct = last_phrase
+            corrections = compute_possible_corrections_for_text(text_to_correct)
+        if text_to_correct_override != '':
+            text_to_correct = text_to_correct_override
+            text_to_correct_override = ''
+            corrections = compute_possible_corrections_for_text(text_to_correct)
+    except Exception as exception:
+        print('Correction system failure!')
+        print(exception)
     gui.text("Correction Menu")
     gui.line()
     gui.text(text_to_correct)
