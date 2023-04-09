@@ -30,6 +30,13 @@ draft_opening_delay = module.setting(
     desc = 'How long to wait before typing after opening the draft window'
 )
 
+pre_draft_opening_delay = module.setting(
+    'fire_chicken_dictation_pre_draft_opening_delay',
+    type = int,
+    default = 500,
+    desc = 'How long to wait before opening the draft window with certain commands'
+)
+
 def sleep_draft_submit_delay():
     sleep_delay_setting_amount(draft_submit_delay)
 def sleep_draft_paste_delay():
@@ -95,6 +102,9 @@ class Actions:
     def fire_chicken_dictation_sleep_draft_opening_delay():
         ''''''
         sleep_delay_setting_amount(draft_opening_delay)
+    def fire_chicken_dictation_sleep_pre_draft_opening_delay():
+        ''''''
+        sleep_delay_setting_amount(pre_draft_opening_delay)
     
 def start_new_draft():
     open_draft()
