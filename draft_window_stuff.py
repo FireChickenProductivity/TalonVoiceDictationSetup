@@ -108,6 +108,7 @@ class Actions:
     
 def start_new_draft():
     open_draft()
+    actions.user.fire_chicken_dictation_sleep_draft_opening_delay()
     actions.edit.select_all()
 
 def open_draft():
