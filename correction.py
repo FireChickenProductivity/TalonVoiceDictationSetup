@@ -46,10 +46,9 @@ class Actions:
         ''''''
         if number - 1 < len(corrections):
             correction = corrections[number - 1]
-            position = correction.relative_position
-            position.select_text()
-            actions.insert(correction.replacement)
+            delete_text_to_correct()
             update_text_to_correct_with_correction(correction)
+            insert_text_to_correct()
     
     def fire_chicken_correct_word_left(number: int):
         ''''''
@@ -92,6 +91,14 @@ def update_text_to_correct_with_correction(correction: Correction):
     text_to_correct = text_to_correct[:original_text_start] + correction.replacement + text_to_correct[correction_ending + 1:]
     global corrections
     corrections = compute_possible_corrections_for_text(text_to_correct)
+
+def delete_text_to_correct():
+    global text_to_correct
+    for character in text_to_correct: actions.key('backspace')
+
+def insert_text_to_correct():
+    global text_to_correct
+    actions.insert(text_to_correct)
 
 last_phrase = ''
 @imgui.open(y=0)
