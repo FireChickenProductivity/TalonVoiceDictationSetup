@@ -1,5 +1,6 @@
-# These are active when we have focus on the draft window
-title:/Talon Draft/
+#Ideally These are active when we have focus on the draft window
+#For now, these are active whenever the draft window is open
+tag: user.draft_window_showing
 and mode: dictation
 -
 settings():
