@@ -1,37 +1,47 @@
-from talon import Module, actions, clip
+from talon import Module, actions, clip, settings
 
 module = Module()
 
-draft_submit_delay = module.setting(
-    'fire_chicken_dictation_draft_submit_delay',
+draft_submit_delay_setting_name = 'fire_chicken_dictation_draft_submit_delay'
+draft_submit_delay = 'user.' + draft_submit_delay_setting_name
+module.setting(
+    draft_submit_delay_setting_name,
     type = int,
     default = 200,
     desc = 'How long to wait between closing the draft window and submitting the draft window draft in milliseconds', 
 )
 
-draft_paste_delay = module.setting(
-    'fire_chicken_dictation_draft_paste_delay',
+draft_paste_delay_setting_name = 'fire_chicken_dictation_draft_paste_delay'
+draft_paste_delay = 'user.' + draft_paste_delay_setting_name
+module.setting(
+    draft_paste_delay_setting_name,
     type = int,
     default = 200,
     desc = 'How long to wait after pasting the draft window text to let the clipboard revert properly',
 )
 
-pre_anchor_move_delay = module.setting(
-    'fire_chicken_dictation_pre_anchor_move_delay',
+pre_anchor_move_delay_setting_name = 'fire_chicken_dictation_pre_anchor_move_delay'
+pre_anchor_move_delay = 'user.' + pre_anchor_move_delay_setting_name
+module.setting(
+    pre_anchor_move_delay_setting_name,
     type = int,
     default = 200,
     desc = 'How long to wait before moving to an anchor under certain circumstances to avoid bugs',
 )
 
-draft_opening_delay = module.setting(
-    'fire_chicken_dictation_draft_opening_delay',
+draft_opening_delay_setting_name = 'fire_chicken_dictation_draft_opening_delay'
+draft_opening_delay = 'user.' + draft_opening_delay_setting_name
+module.setting(
+    draft_opening_delay_setting_name,
     type = int,
     default = 200,
     desc = 'How long to wait before typing after opening the draft window'
 )
 
-pre_draft_opening_delay = module.setting(
-    'fire_chicken_dictation_pre_draft_opening_delay',
+pre_draft_opening_delay_setting_name = 'fire_chicken_dictation_pre_draft_opening_delay'
+pre_draft_opening_delay = 'user.' + pre_draft_opening_delay_setting_name
+module.setting(
+    pre_draft_opening_delay_setting_name,
     type = int,
     default = 500,
     desc = 'How long to wait before opening the draft window with certain commands'
@@ -45,7 +55,7 @@ def sleep_pre_anchor_move_delay():
     sleep_delay_setting_amount(pre_anchor_move_delay)
 
 def sleep_delay_setting_amount(setting):
-    actions.sleep(f'{setting.get()}ms')
+    actions.sleep(f'{settings.get(setting)}ms')
 
 @module.action_class
 class Actions:
