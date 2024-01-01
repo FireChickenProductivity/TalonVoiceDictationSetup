@@ -1,6 +1,7 @@
 mode: command
 -
 ^(dictate|drafting)$:
+    user.fire_chicken_dictation_sleep_draft_opening_delay()
     user.fire_chicken_enable_dictation_mode_and_draft_window_from_command_mode()
 
 ^(dictate|drafting|speech) <user.raw_prose>$:
