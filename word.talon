@@ -1,4 +1,4 @@
-app: Microsoft Word
+10app: Microsoft Word
 -
 settings():
   # Enable 'Smart dictation mode', see https://github.com/knausj85/knausj_talon/pull/356
