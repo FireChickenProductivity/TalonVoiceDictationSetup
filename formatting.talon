@@ -1,9 +1,9 @@
 mode: dictation
 -
 all caps <user.raw_prose>:
-    auto_insert(user.formatted_text(raw_prose, 'all cap'))
+    auto_insert(user.formatted_text(raw_prose, 'ALL_CAPS'))
 title case <user.raw_prose>:
-    auto_insert(user.formatted_text(raw_prose, 'title'))
+    auto_insert(user.formatted_text(raw_prose, 'CAPITALIZE_ALL_WORDS'))
 form form <user.format_text>:
     user.dictation_insert_raw(format_text)
 word word <user.word>: user.insert_with_history(user.word)
