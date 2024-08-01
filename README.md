@@ -1,5 +1,6 @@
 My personal set up for Talon's dictation mode but intended to be usable by others. I intend to provide proper documentation later when less busy.
 
+This depends on community. 
 
 # Giving Credit
 This project contains code from the Talon Voice community repository (https://github.com/knausj85/knausj_talon) provided under the following license:

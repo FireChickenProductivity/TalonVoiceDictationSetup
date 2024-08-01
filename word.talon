@@ -10,17 +10,17 @@ draft paragraph:
     user.fire_chicken_enable_dictation_mode_editing_of_selected_text_through_draft_window_from_command_mode()
 
 pause:
-    key(alt-tab)
+    user.switcher_focus_last()
     sleep(0.5)
     key(space)
     sleep(0.5)
-    key(alt-tab) 
+    user.switcher_focus_last() 
 
 change down:
-    key(alt-tab)
+    user.switcher_focus_last()
     sleep(0.5)
     key(pagedown)
     sleep(0.5)
-    key(alt-tab)
+    user.switcher_focus_last()
 
     
