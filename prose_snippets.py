@@ -22,6 +22,8 @@ _default_additional_snippets = {
     'close paren': ')',
     'close pren': ')',
     'apostrophe s': "'s",
+    'apostrophe us': "'s",
+    'apostrophe as': "'s",
     'apostrophe': "'",
 }
 
